@@ -11,7 +11,9 @@ class ContactViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return Contact.objects.filter(user=self.request.user)
+        queryset = Contact.objects.filter(user=self.request.user)
+        print(f"Queryset: {queryset}")  # Add logging
+        return queryset
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
